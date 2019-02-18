@@ -1,14 +1,14 @@
 <template>
   <div class="login">
     <!-- model属性用于存放表单的数据对象 -->
-    <el-form :model="loginForm" class="container">
+    <el-form :model="loginForm" class="container" :rules="loginrules">
       <el-form-item>
         <img src="../assets/assets/avatar.jpg" alt="头像" class="avatar">
       </el-form-item>
-      <el-form-item>
+      <el-form-item prop="username">
          <el-input prefix-icon="myicon myicon-user" v-model="loginForm.username"></el-input>
       </el-form-item>
-      <el-form-item>
+      <el-form-item prop="password">
          <el-input prefix-icon="myicon myicon-key" v-model="loginForm.password" type="password"></el-input>
       </el-form-item>
       <el-form-item>
@@ -25,6 +25,14 @@ export default {
       loginForm: {
         username: '',
         password: ''
+      },
+      loginrules: {
+        username: [
+          { required: true, message: '请输入用户名', trigger: 'blur' }
+        ],
+        password: [
+          { required: true, message: '请输入密码', trigger: 'blur' }
+        ]
       }
     }
   }
