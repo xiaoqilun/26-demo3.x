@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <!-- model属性用于存放表单的数据对象 -->
-    <el-form :model="loginForm" class="container" :rules="loginrules">
+    <el-form :model="loginForm" class="container" :rules="loginrules" ref="loginRef">
       <el-form-item>
         <img src="../assets/assets/avatar.jpg" alt="头像" class="avatar">
       </el-form-item>
@@ -12,7 +12,7 @@
          <el-input prefix-icon="myicon myicon-key" v-model="loginForm.password" type="password"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" class="login-btn">登陆</el-button>
+        <el-button type="primary" class="login-btn" @click="handleLogin">登陆</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -34,6 +34,20 @@ export default {
           { required: true, message: '请输入密码', trigger: 'blur' }
         ]
       }
+    }
+  },
+  methods: {
+    handleLogin () {
+      // console.log('执行登录方法')
+      this.$refs.loginRef.validate((isPass) => {
+        if (isPass) {
+          // 发请求
+          console.log('发请求')
+        } else {
+          // 弹出校验未通过提示信息
+          return false
+        }
+      })
     }
   }
 }
